@@ -5,7 +5,8 @@ import java.util.regex.Pattern;
 
 public class Test {
 	public static void main(String[] args) {	
-	final String REG_EX ="\\s*(\\d{4}-\\d{2}-\\d{2}) \\s*(\\d{2}:\\d{2}:\\d{2},\\d{1,3})\\s*\\[(\\w+)\\] \\s*(.*)\\s*<([0-9]+)>\\s*(.*)";
+	//final String REG_EX ="\\s*(\\d{4}-\\d{2}-\\d{2}) \\s*(\\d{2}:\\d{2}:\\d{2},\\d{1,3})\\s*\\[(\\w+)\\] \\s*(.*)\\s*<([0-9]+)>\\s*(.*)";
+		final String REG_EX = "\\s*(\\d{4}-\\d{2}-\\d{2} \\s*\\d{2}:\\d{2}:\\d{2}),\\d{1,3}\\s*\\[(\\w+)\\] \\s*(.*)\\s*<([0-9]+)>\\s*(.*)";
 	String s ="2012-08-02 14:47:28,831 [I4] Sheduling default-report-creation-thread  <131> TOMCATSERVER.DEFAULT.DefaultReportCreator";
 	regexCheck(REG_EX, s);
 	}

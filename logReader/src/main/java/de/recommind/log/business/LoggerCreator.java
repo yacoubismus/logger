@@ -21,7 +21,6 @@ public class LoggerCreator implements ILogCreator {
 		logger.setLogIdentifierClass(builder.getLogIdentifierClass());
 		logger.setLogLevel(builder.logLevel);
 		logger.setLogMessage(builder.getLogMessage());
-		logger.setTimeField(builder.getTimeField());
 		return logger;
 	}
 

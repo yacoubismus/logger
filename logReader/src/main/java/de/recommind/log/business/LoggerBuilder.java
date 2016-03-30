@@ -1,11 +1,13 @@
 package de.recommind.log.business;
 
 public class LoggerBuilder {
-	String fileName;
-	java.sql.Date dateField;
-	java.sql.Time timeField;
-	Integer logLevel;
-	String logMessage;
+	private String fileName;
+	private java.sql.Date dateField;
+	private String logIdentifierClass;
+	private String logLevel;
+	private String logMessage;
+	private Integer logThreadId;
+	
 	public String getLogMessage() {
 		return logMessage;
 	}
@@ -18,20 +20,14 @@ public class LoggerBuilder {
 		return dateField;
 	}
 
-	public java.sql.Time getTimeField() {
-		return timeField;
-	}
 
-	public Integer getLogLevel() {
+	public String getLogLevel() {
 		return logLevel;
 	}
 
 	public String getLogIdentifierClass() {
 		return logIdentifierClass;
 	}
-
-	
-	String logIdentifierClass;
 
 	public LoggerBuilder() {
 
@@ -42,12 +38,7 @@ public class LoggerBuilder {
 		return this;
 	}
 
-	public LoggerBuilder setTimeField(java.sql.Time timeField) {
-		this.timeField = timeField;
-		return this;
-	}
-
-	public LoggerBuilder setLogLevel(Integer logLevel) {
+	public LoggerBuilder setLogLevel(String logLevel) {
 		this.logLevel = logLevel;
 		return this;
 	}
@@ -65,6 +56,14 @@ public class LoggerBuilder {
 	public LoggerBuilder setDateField(java.sql.Date dateField) {
 		this.dateField = dateField;
 		return this;
+	}
+
+	public Integer getLogThreadId() {
+		return logThreadId;
+	}
+
+	public void setLogThreadId(Integer logThreadId) {
+		this.logThreadId = logThreadId;
 	}
 
 }
