@@ -62,8 +62,9 @@ public class LoggerBuilder {
 		return logThreadId;
 	}
 
-	public void setLogThreadId(Integer logThreadId) {
+	public LoggerBuilder setLogThreadId(Integer logThreadId) {
 		this.logThreadId = logThreadId;
+                return this;
 	}
 
 }

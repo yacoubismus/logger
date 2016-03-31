@@ -41,15 +41,19 @@ public class LoggerReader {
 		Pattern pattern = Pattern.compile(REG_EX);
 		Matcher matcher = pattern.matcher(logLine);
 		if(matcher.find()){
-			builder.setDateField(new DateAndTimeConveter().convertDate(matcher.group(dateTime)));
-			builder.setLogLevel(matcher.group(logLevel));
-			builder.setLogMessage(matcher.group(logMessage));
-			builder.setLogThreadId(Integer.valueOf(matcher.group(threadNumber)));
-			builder.setLogIdentifierClass(matcher.group(logClass));
+			builder
+                        .setDateField(new DateAndTimeConveter().convertDate(matcher.group(dateTime)))
+			.setLogLevel(matcher.group(logLevel))
+			.setLogMessage(matcher.group(logMessage))
+			.setLogThreadId(Integer.valueOf(matcher.group(threadNumber)))
+                        .setLogIdentifierClass(matcher.group(logClass));
+			
+                        return builder;
+        //(matcher.group(logClass));
 			
 			
 		}
-		return null;
+		return builder;
 	}
         
         public java.util.function.Function createLambdaFunction(){
