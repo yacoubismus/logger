@@ -24,13 +24,12 @@ public class LoggerReader {
 	List<Logger> loggers = new ArrayList<Logger>();
 	final String REG_EX = "\\s*(\\d{4}-\\d{2}-\\d{2} \\s*\\d{2}:\\d{2}:\\d{2}),\\d{1,3}\\s*\\[(\\w+)\\] \\s*(.*)\\s*<([0-9]+)>\\s*(.*)";
 	//\s*(\d{4}-\d{2}-\d{2} \s*\d{2}:\d{2}:\d{2}),\d{1,3}\s*\[(\w+)\] \s*(.*)\s*<([0-9]+)>\s*(.*)
-	public void loggerReaderByLine(String fileName,
-			Consumer<? super String> action) {
-
+	public void loggerReaderByLine(String fileName) {
 		// read file into stream, try-with-resources
 		try (Stream<String> stream = Files.lines(Paths.get(fileName))) {
-			stream.map(s -> );
-			stream.forEach(System.out::println);
+			stream.map(createLambdaFunction())
+                                .collect(collector);
+			//stream.forEach(System.out::println);
 
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -52,5 +51,15 @@ public class LoggerReader {
 		}
 		return null;
 	}
+        
+        public java.util.function.Function createLambdaFunction(){
+            java.util.function.Function<? super String, LoggerBuilder> function =
+                        s -> { 
+                            return createLoggerFromStringLine(s);                           
+                        };
+            return function;
+        }
+        
+       
 
 }

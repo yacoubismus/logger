@@ -17,9 +17,9 @@ public class LoggerCreator implements ILogCreator {
 	@Override
 	public Logger createLogger(LoggerBuilder builder) {
 		Logger logger = new Logger();
-		logger.setDateField(builder.dateField);
+		logger.setDateField(builder.getDateField());
 		logger.setLogIdentifierClass(builder.getLogIdentifierClass());
-		logger.setLogLevel(builder.logLevel);
+		logger.setLogLevel(builder.getLogLevel());
 		logger.setLogMessage(builder.getLogMessage());
 		return logger;
 	}
