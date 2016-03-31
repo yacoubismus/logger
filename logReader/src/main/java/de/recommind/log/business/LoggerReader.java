@@ -12,6 +12,8 @@ import java.util.stream.Stream;
 
 import de.recommind.log.converter.DateAndTimeConveter;
 import de.recommind.log.model.Logger;
+import java.util.Collection;
+import java.util.stream.Collectors;
 
 public class LoggerReader {
 	Integer dateTime = 1;
@@ -28,9 +30,7 @@ public class LoggerReader {
 		// read file into stream, try-with-resources
 		try (Stream<String> stream = Files.lines(Paths.get(fileName))) {
 			stream.map(createLambdaFunction())
-                                .collect(collector);
-			//stream.forEach(System.out::println);
-
+                                .collect(Collectors.toList());	
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
