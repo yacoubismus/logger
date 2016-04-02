@@ -5,6 +5,7 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 import java.util.function.Consumer;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -21,10 +22,10 @@ public class LoggerReader {
 	Integer logLevel = 2;
 	Integer logMessage = 3;
 	Integer threadNumber = 4;
-	Integer logClass = 5;
-	
+	Integer logClass = 5;	
 	LoggerBuilder builder;
 	List<Logger> loggers = new ArrayList<Logger>();
+	Set<String> distinctLogLevels;
 	final String REG_EX = "\\s*(\\d{4}-\\d{2}-\\d{2} \\s*\\d{2}:\\d{2}:\\d{2}),\\d{1,3}\\s*\\[(\\w+)\\] \\s*(.*)\\s*<([0-9]+)>\\s*(.*)";
 	//\s*(\d{4}-\d{2}-\d{2} \s*\d{2}:\d{2}:\d{2}),\d{1,3}\s*\[(\w+)\] \s*(.*)\s*<([0-9]+)>\s*(.*)
 	@SuppressWarnings("unchecked")
@@ -66,6 +67,10 @@ public class LoggerReader {
                             return createLoggerFromStringLine(s);                           
                         };
             return function;
+        }
+        
+        public Set<String> createDistinctLogLevels(List<LoggerBuilder> loggers) {
+        	return loggers.stream().filter(p -> )
         }
         
        
