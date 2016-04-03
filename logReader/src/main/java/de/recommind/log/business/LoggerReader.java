@@ -4,9 +4,14 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.function.Consumer;
+import java.util.function.Function;
+import java.util.function.Predicate;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Stream;
@@ -18,16 +23,18 @@ import java.util.Collection;
 import java.util.stream.Collectors;
 
 public class LoggerReader {
+	
 	Integer dateTime = 1;
 	Integer logLevel = 2;
 	Integer logMessage = 3;
 	Integer threadNumber = 4;
-	Integer logClass = 5;	
+	Integer logClass = 5;
+	String fileName;
 	LoggerBuilder builder;
 	List<Logger> loggers = new ArrayList<Logger>();
 	Set<String> distinctLogLevels;
 	final String REG_EX = "\\s*(\\d{4}-\\d{2}-\\d{2} \\s*\\d{2}:\\d{2}:\\d{2}),\\d{1,3}\\s*\\[(\\w+)\\] \\s*(.*)\\s*<([0-9]+)>\\s*(.*)";
-	//\s*(\d{4}-\d{2}-\d{2} \s*\d{2}:\d{2}:\d{2}),\d{1,3}\s*\[(\w+)\] \s*(.*)\s*<([0-9]+)>\s*(.*)
+
 	@SuppressWarnings("unchecked")
 	public List<LoggerBuilder> loggerReaderByLine(String fileName) {
 		// read file into stream, try-with-resources
@@ -69,9 +76,17 @@ public class LoggerReader {
             return function;
         }
         
-        public Set<String> createDistinctLogLevels(List<LoggerBuilder> loggers) {
-        	return loggers.stream().filter(p -> )
-        }
+//        public Set<String> createDistinctLogLevels(List<LoggerBuilder> loggers) {
+//        	return loggers.stream().filter(distinctByKey(log -> log.));//filter(distinctByKey(log -> log.));
+//        }
+       
+       public Set<String> createDistinctLogLevelsLoop(List<LoggerBuilder> loggers){
+    	   Set<String> distinctLogLevels = new HashSet<String>();
+    	   for(LoggerBuilder logger: loggers){
+    		   distinctLogLevels.add(logger.getLogLevel());
+    	   }
+    	   return distinctLogLevels;
+       }
         
        
 
