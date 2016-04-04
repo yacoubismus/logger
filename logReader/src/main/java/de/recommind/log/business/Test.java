@@ -6,6 +6,8 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import de.recommind.log.filter.LoggerFilter;
+
 public class Test {
 	public static void main(String[] args) {	
 	//final String REG_EX ="\\s*(\\d{4}-\\d{2}-\\d{2}) \\s*(\\d{2}:\\d{2}:\\d{2},\\d{1,3})\\s*\\[(\\w+)\\] \\s*(.*)\\s*<([0-9]+)>\\s*(.*)";
@@ -16,6 +18,10 @@ public class Test {
 	List<LoggerBuilder> loggers = reader.loggerReaderByLine("src\\main\\resources\\dochold.log");
 	LoggerBuilder log = loggers.get(0);
 	Timestamp date = log.getDateField();
+	LoggerFilter filter = new LoggerFilter(loggers);
+	List<LoggerBuilder> filteredList = filter.filterLoggerList("date", "2012-08-02 15:14:16", "before");
+	
+	
 	}
 
 	public static void regexCheck(String REG_EX, String s){

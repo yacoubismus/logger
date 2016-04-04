@@ -2,6 +2,7 @@ package de.recommind.log.filter;
 
 import java.util.List;
 import java.util.function.Predicate;
+import java.util.stream.Collectors;
 
 import de.recommind.log.business.LoggerBuilder;
 import de.recommind.log.converter.DateAndTimeConveter;
@@ -14,14 +15,15 @@ public class LoggerFilter {
 		this.loggers = loggers;
 	}
 	
-	public List<LoggerBuilder> filterLoggerList(String category , String value){
-		this.loggers.stream().filter(p -> p.getLogLevel().equals(value));
-		return null;
+	public List<LoggerBuilder> filterLoggerList(String category , String value, String afterOrBefore){
+		return this.loggers.stream()
+				.filter(createFilterConcept(category,value,afterOrBefore)).collect(Collectors.toList());
+				
 	}
 	
-	public Predicate<? extends LoggerBuilder> createFilterConcept(String category, String value, String afterOrBefore) {
+	public Predicate<? super LoggerBuilder> createFilterConcept(String category, String value, String afterOrBefore) {
 
-		Predicate<? extends LoggerBuilder> predicate = p -> {
+		Predicate<? super LoggerBuilder> predicate = p -> {
 			switch (category) {
 			case "date":
 				if(afterOrBefore.equals("after"))
@@ -51,8 +53,11 @@ public class LoggerFilter {
 	}
 	
 	public boolean filterByDateBefore(LoggerBuilder logger, String dateAsString){
-		IDateAndTimeConveter converter = new DateAndTimeConveter();
-		return logger.getDateField().before(converter.convertDate(dateAsString));
+		if(logger.getDateField()!= null) {
+			IDateAndTimeConveter converter = new DateAndTimeConveter();
+			return logger.getDateField().before(converter.convertDate(dateAsString));
+		}
+		return false;
 	}
 	
 	public boolean filterByLoggerLevel(LoggerBuilder logger,String logLevel){
