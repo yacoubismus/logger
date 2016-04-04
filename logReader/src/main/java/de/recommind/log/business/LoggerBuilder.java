@@ -2,7 +2,7 @@ package de.recommind.log.business;
 
 public class LoggerBuilder {
 	private String fileName;
-	private java.sql.Date dateField;
+	private java.sql.Timestamp dateField;
 	private String logIdentifierClass;
 	private String logLevel;
 	private String logMessage;
@@ -16,7 +16,7 @@ public class LoggerBuilder {
 		return fileName;
 	}
 
-	public java.sql.Date getDateField() {
+	public java.sql.Timestamp getDateField() {
 		return dateField;
 	}
 
@@ -53,7 +53,7 @@ public class LoggerBuilder {
 		return this;
 	}
 
-	public LoggerBuilder setDateField(java.sql.Date dateField) {
+	public LoggerBuilder setDateField(java.sql.Timestamp dateField) {
 		this.dateField = dateField;
 		return this;
 	}

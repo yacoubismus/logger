@@ -19,19 +19,21 @@ public class LoggerFilter {
 		return null;
 	}
 	
-	public Predicate<? extends LoggerBuilder> createFilterConcept(String category, String value) {
+	public Predicate<? extends LoggerBuilder> createFilterConcept(String category, String value, String afterOrBefore) {
 
 		Predicate<? extends LoggerBuilder> predicate = p -> {
 			switch (category) {
 			case "date":
+				if(afterOrBefore.equals("after"))
 				return filterByDateAfter(p,value);
+				else
+					return filterByDateBefore(p, value);
 				
             case "logLevel":
             	filterByLoggerLevel(p,value);
 				break;
-            case "time":
-	        break; 
             case "someText":
+            	filterByText(p, value);
 				break;
 
 			default:
@@ -54,8 +56,15 @@ public class LoggerFilter {
 	}
 	
 	public boolean filterByLoggerLevel(LoggerBuilder logger,String logLevel){
-		return logger.getLogLevel().equals(logLevel);	
-		
+		return logger.getLogLevel().equals(logLevel);		
+	}
+	
+	public boolean filterByText(LoggerBuilder logger, String someText){
+		return logger.getDateField().toString().contains(someText)||
+				logger.getLogIdentifierClass().contains(someText)||
+				logger.getLogLevel().contains(someText)||
+				logger.getLogMessage().contains(someText)||
+				logger.getLogThreadId().toString().contains(someText);
 	}
 
 }

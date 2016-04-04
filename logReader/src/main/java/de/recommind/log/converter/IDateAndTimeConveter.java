@@ -1,8 +1,10 @@
 package de.recommind.log.converter;
 
+import java.sql.Timestamp;
+
 public interface IDateAndTimeConveter  {
 	
-	public java.sql.Date convertDate(String dateAsString);
+	public Timestamp convertDate(String dateAsString);
 	 
 
 }

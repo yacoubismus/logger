@@ -22,7 +22,7 @@ public class Logger implements Serializable {
 	private String fileName;
 
 	@Column(name = "LOG_DATE")
-	private java.sql.Date dateField;
+	private java.sql.Timestamp dateField;
 
 	@Column(name = "LOG_LEVEL")
 	private String logLevel;
@@ -42,11 +42,11 @@ public class Logger implements Serializable {
 		super();
 	}
 
-	public java.sql.Date getDateField() {
+	public java.sql.Timestamp getDateField() {
 		return dateField;
 	}
 
-	public void setDateField(java.sql.Date dateField) {
+	public void setDateField(java.sql.Timestamp dateField) {
 		this.dateField = dateField;
 	}
 

@@ -1,6 +1,7 @@
 package de.recommind.log.business;
 
 import java.sql.Date;
+import java.sql.Timestamp;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -14,7 +15,7 @@ public class Test {
 	LoggerReader reader = new LoggerReader();
 	List<LoggerBuilder> loggers = reader.loggerReaderByLine("src\\main\\resources\\dochold.log");
 	LoggerBuilder log = loggers.get(0);
-	Date date = log.getDateField();
+	Timestamp date = log.getDateField();
 	}
 
 	public static void regexCheck(String REG_EX, String s){
